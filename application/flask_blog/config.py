@@ -1,5 +1,6 @@
 #flask_blog/config.pow
-
+import os
 DEBUG = True
-USERNAME = 'anon'
-PASSWORD = 'fake12357'
+USERNAME = os.getenv("usrnme")
+PASSWORD = os.getenv("psswrd")
+SECRET_KEY = os.getenv("secretKey")
