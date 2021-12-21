@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2>{{ entry.title }}</h2>
+<br>
+{% if not entry.imglnk %}
+<img src="https://www.pngitem.com/pimgs/m/84-844866_face-nose-black-facial-expression-person-smile-emotion.png" alt="Default Image">
+{% else %}
+<img src="{{entry.imglnk}}" alt="{{ entry.title }}">
+{% endif %}
+<br>
+<br>
+
+{{ entry.text }}
+
+<br><br>
+Posted at {{ entry.created_at }}
+
+{% endblock %}
