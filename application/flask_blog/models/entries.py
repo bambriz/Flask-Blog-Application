@@ -6,7 +6,7 @@ class Entry(db.Model):
 	__tablename__ = 'entries'
 	id = db.Column(db.Integer, primary_key=True)
 	title = db.Column(db.String(50), unique=True)
-	imglnk = db.Column(db.String(100))
+	imglnk = db.Column(db.String(1000))
 	text = db.Column(db.Text)
 	created_at = db.Column(db.DateTime)
 
