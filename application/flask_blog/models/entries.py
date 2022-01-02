@@ -21,3 +21,7 @@ class Entry(db.Model):
 
 	def __repr__(self):
 		return '<Entry id:{} title:{} imglnk:{} text:{}'.format(self.id, self.title, self.imglnk, self.text)
+	def getPassedTimeStamp(self):
+		current = datetime.utcnow() -self.created_at
+		minutes = divmod(current.total_seconds(), 60)
+		return f'{int(minutes[0])} minutes and {int(minutes[1])} seconds'

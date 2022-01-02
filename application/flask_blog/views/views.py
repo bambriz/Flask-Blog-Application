@@ -5,6 +5,7 @@ from flask_blog import app
 from flask_blog import db
 from flask_blog.models.users import User
 from flask_login import login_user, login_required, current_user, logout_user
+import datetime 
 
 
 @app.route('/signup', methods=['GET', 'POST'])

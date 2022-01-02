@@ -1,0 +1,12 @@
+{
+  "files": {
+    "application/flask_blog/models/comments.py": [
+      {
+        "id": "78a03254-9550-4461-8ab3-acae05608cf1",
+        "line": 29,
+        "version": 257,
+        "index": 904
+      }
+    ]
+  }
+}

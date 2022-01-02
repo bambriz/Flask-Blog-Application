@@ -24,3 +24,8 @@ class Comment(db.Model):
 
     def level(self):
         return len(self.path) // self._N - 1
+
+    def getPassedTimeStamp(self):
+        current = datetime.utcnow() -self.timestamp
+        minutes = divmod(current.total_seconds(), 60)
+        return f'{int(minutes[0])} minutes and {int(minutes[1])} seconds' 

@@ -3,19 +3,21 @@
 
 <h2>{{ entry.title }}</h2>
 <br>
+<div class="card-body">
 {% if not entry.imglnk %}
 <img src="https://www.pngitem.com/pimgs/m/84-844866_face-nose-black-facial-expression-person-smile-emotion.png" alt="Default Image">
 {% else %}
-<img src="{{entry.imglnk}}" alt="{{ entry.title }}">
+<img src="{{entry.imglnk}}" alt="{{ entry.title }}" height="60%" width="40%">
 {% endif %}
+</div>
 <br>
 <br>
 
-
+<div class="jumbotron">
 {{ entry.text }}
-
+</div>
 <br><br>
-Posted at {{ entry.created_at }}
+Posted {{ entry.getPassedTimeStamp() }} ago
 
 <br>
 <br>
@@ -40,9 +42,9 @@ Posted at {{ entry.created_at }}
                                     <div>
                                         <p class="m-0 text-muted"><span class="text-primary">
                                                 {{comment.author}}</span> <br>
-                                            <span class="text-small">{{comment.timestamp}}</span>
+                                            <span class="text-small">Posted {{comment.getPassedTimeStamp()}} ago</span>
                                         </p>
-                                        <p class="m-0 text-muted">{{comment.text}}</p>
+                                        <p class="m-0 text-muted jumbotron">{{comment.text}}</p>
                                         <a class="" data-bs-toggle="collapse" href="#comment-{{comment.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                                             <i class="bi bi-reply"></i>
                                         </a>
