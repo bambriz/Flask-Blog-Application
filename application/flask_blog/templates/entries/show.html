@@ -11,9 +11,60 @@
 <br>
 <br>
 
+
 {{ entry.text }}
 
 <br><br>
 Posted at {{ entry.created_at }}
 
+<br>
+<br>
+<h4>Comments:</h4>
+{% for comment in comments %}
+        <div class="row">
+            <!-- Begin comment indentation -->
+            {% if comment.level() == 0 %}
+            <div class="col-12 border-start border-primary">
+                {% elif comment.level() == 1 %}
+                <div class="col-11 offset-1 border-start border-secondary">
+                    {% elif comment.level() == 2 %}
+                    <div class="col-10 offset-2 border-start border-success">
+                        {% elif comment.level() == 3 %}
+                        <div class="col-9 offset-3 border-start border-info">
+                            {% elif comment.level() == 4 %}
+                            <div class="col-8 offset-4 border-start border-primary">
+                                {% else %}
+                                <div class="col-7 offset-5 border-start border-primary">
+                                    {% endif %}
+                                    <!-- End comment indentation -->
+                                    <div>
+                                        <p class="m-0 text-muted"><span class="text-primary">
+                                                {{comment.author}}</span> <br>
+                                            <span class="text-small">{{comment.timestamp}}</span>
+                                        </p>
+                                        <p class="m-0 text-muted">{{comment.text}}</p>
+                                        <a class="" data-bs-toggle="collapse" href="#comment-{{comment.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                            <i class="bi bi-reply"></i>
+                                        </a>
+                                    </div>
+                                    <div class="w-50" id="comment-{{comment.id}}">
+                                        <form action="{{url_for('new_reply',id=entry.id,commentID=comment.id) }}" method="POST">
+                                            <div class="form-group">
+        										<label for="InputTextReply">Reply...</label>
+        										<textarea class="form-control" id="InputTextReply" name=replytext rows="1"></textarea>
+												<button type="submit" class="btn btn-primary mt-2 btn-sm" id="reply-button" name="reply-button">Post Reply</button>
+    										</div>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+							<form action="{{url_for('new_comment',id=entry.id) }}" method="POST">
+                                            <div class="form-group">
+        										<label for="InputTextComment">Comment...</label>
+        										<textarea class="form-control" id="InputTextComment" name=commenttext rows="3"></textarea>
+    										</div>
+                                            <button type="submit" class="btn btn-primary mt-2 btn-sm" id="comment-button" name="comment-button">Post Comment</button>
+                                        </form>
 {% endblock %}
