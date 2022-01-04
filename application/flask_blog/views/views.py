@@ -6,6 +6,8 @@ from flask_blog import db
 from flask_blog.models.users import User
 from flask_login import login_user, login_required, current_user, logout_user
 import datetime 
+from flask_blog.models.entries import Entry
+from flask_blog.models.comments import Comment
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -61,7 +63,9 @@ def logout():
 def profile():
 	if not session.get('logged_in'):
 		return redirect(url_for('welcome'))
-	return render_template('profile.html',name=current_user.username)
+	entries = Entry.query.filter_by(created_by=current_user.username)
+	comments = Comment.query.filter_by(author=current_user.username)
+	return render_template('profile.html',name=current_user.username,entries=entries, comments=comments)
 
 @app.route('/welcome')
 def welcome():

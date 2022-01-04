@@ -21,3 +21,6 @@ class User(UserMixin, db.Model):
 
 	def __repr__(self):
 		return '<Entry id:{} Username:{}'.format(self.id, self.username)
+
+	def setProfilePicture(self,proPic):
+		self.profilepictureurl = proPic

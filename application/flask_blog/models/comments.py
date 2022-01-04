@@ -1,5 +1,6 @@
 from datetime import datetime
 from flask_blog import db
+from flask_blog.models.entries import Entry
 
 class Comment(db.Model):
     _N = 6
@@ -28,4 +29,8 @@ class Comment(db.Model):
     def getPassedTimeStamp(self):
         current = datetime.utcnow() -self.timestamp
         minutes = divmod(current.total_seconds(), 60)
-        return f'{int(minutes[0])} minutes and {int(minutes[1])} seconds' 
+        return f'{int(minutes[0])} minutes and {int(minutes[1])} seconds'
+		 
+    def getParentPost(self):
+        entry = Entry.query.get(self.parent_id)
+        return entry

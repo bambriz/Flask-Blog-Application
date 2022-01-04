@@ -27,7 +27,8 @@ def add_entry():
 	entry = Entry(
 		title=request.form['title'],
 		imglnk=request.form['imglnk'],
-		text=request.form['text']
+		text=request.form['text'],
+		created_by=current_user.username
 	)
 	db.session.add(entry)
 	db.session.commit()
@@ -51,14 +52,16 @@ def new_reply(id,commentID=None):
 			parent_id = request.args['commentID']
 			new_comment = Comment(text=text,author=author,parentpostID=parentpostID,parent_id=parent_id)
 			new_comment.save()
-	return redirect(url_for('show_entry',id=id))
-@app.route('/entries/<int:id>', methods=['POST'])
-def new_comment(id):
-	if "commtext" in request.form:
+	else:
 		text = request.form['commenttext']
 		author = current_user.username
 		parentpostID = id
 		new_comment = Comment(text=text,author=author,parentpostID=parentpostID)
 		new_comment.save()
+	return redirect(url_for('show_entry',id=id))
+@app.route('/entries/<int:id>', methods=['POST'])
+def new_comment(id):
+	
+	
 	return redirect(url_for('show_entry',id=id))
 	

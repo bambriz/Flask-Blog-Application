@@ -8,15 +8,17 @@ class Entry(db.Model):
 	title = db.Column(db.String(50), unique=True)
 	imglnk = db.Column(db.String(1000))
 	text = db.Column(db.Text)
+	created_by = db.Column(db.String(32))
 	created_at = db.Column(db.DateTime)
 
-	def __init__(self, title=None, imglnk=None, text=None):
+	def __init__(self, title=None, imglnk=None, text=None, created_by=None):
 		self.title = title
 		if imglnk is None:
 			self.imglnk = 'https://www.pngitem.com/pimgs/m/84-844866_face-nose-black-facial-expression-person-smile-emotion.png'
 		else:
 			self.imglnk = imglnk
 		self.text = text
+		self.created_by = created_by
 		self.created_at = datetime.utcnow()
 
 	def __repr__(self):
